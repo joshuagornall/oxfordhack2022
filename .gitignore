@@ -3,5 +3,7 @@ models/
 __pycache__/
 runs/
 models/
+emotic/
+fer2013/
 
 *.zip
