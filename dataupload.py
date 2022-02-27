@@ -14,10 +14,11 @@ cred = credentials.Certificate("firebase_credentials.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-collection_name = "emotions"
+model_collection_name = "emotions"
 
-def upload_emotion(emotion):
+
+def upload_model_emotion(emotion):
     doc_title = str(int(time.time()))
     data = {"timestamp": doc_title,
             "emotion": emotion}
-    db.collection(collection_name).document(doc_title).set(data)
+    db.collection(model_collection_name).document(doc_title).set(data)

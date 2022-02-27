@@ -14,10 +14,12 @@ cred = credentials.Certificate("firebase_credentials.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-collection_name = "emotions"
+model_collection_name = "emotions"
+
 
 def get_data():
-    data_ref = db.collection(collection_name).order_by('timestamp', direction=firestore.Query.DESCENDING).limit(1)
+    data_ref = db.collection(model_collection_name).order_by(
+        'timestamp', direction=firestore.Query.DESCENDING).limit(1)
     docs = data_ref.stream()
 
     for doc in docs:
