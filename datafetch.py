@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb 27 04:43:35 2022
+Created on Sun Feb 27 04:53:07 2022
 
 @author: Alice
 """
@@ -16,8 +16,10 @@ db = firestore.client()
 
 collection_name = "emotions"
 
-def upload_emotion(emotion):
-    doc_title = str(int(time.time()))
-    data = {"timestamp": doc_title,
-            "emotion": emotion}
-    db.collection(collection_name).document(doc_title).set(data)
+def get_data():
+    data_ref = db.collection(collection_name).order_by('timestamp', direction=firestore.Query.DESCENDING).limit(1)
+    docs = data_ref.stream()
+
+    for doc in docs:
+        latest_data = doc.to_dict()
+        print(latest_data)
